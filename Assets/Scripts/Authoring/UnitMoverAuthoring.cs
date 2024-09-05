@@ -1,10 +1,11 @@
 using Unity.Entities;
+using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class UnitMoverAuthoring : MonoBehaviour
 {
-    public float Value;
+    public float MoveSpeed;
+    public float RotationSpeed;
 
     public class MoveSpeedBaker : Baker<UnitMoverAuthoring>
     {
@@ -13,7 +14,8 @@ public class UnitMoverAuthoring : MonoBehaviour
             Entity entity = GetEntity(TransformUsageFlags.Dynamic);
             AddComponent(entity, new UnitMover
             {
-                Value = authoring.Value,
+                MoveSpeed = authoring.MoveSpeed,
+                RotationSpeed = authoring.RotationSpeed,
             });
         }
     }
@@ -21,5 +23,7 @@ public class UnitMoverAuthoring : MonoBehaviour
 
 public struct UnitMover : IComponentData
 {
-    public float Value;
+    public float MoveSpeed;
+    public float RotationSpeed;
+    public float3 TargetPosition;
 }
