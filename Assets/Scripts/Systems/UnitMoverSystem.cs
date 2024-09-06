@@ -1,10 +1,8 @@
 using Unity.Burst;
 using Unity.Entities;
-using Unity.Jobs;
 using Unity.Mathematics;
 using Unity.Physics;
 using Unity.Transforms;
-using UnityEngine;
 
 partial struct UnitMoverSystem : ISystem
 {
@@ -16,7 +14,7 @@ partial struct UnitMoverSystem : ISystem
             DeltaTime = SystemAPI.Time.DeltaTime,
         };
         unitMoverJob.ScheduleParallel();
-        
+
         /*foreach ((
                      RefRW<LocalTransform> localTransform,
                      RefRO<UnitMover> unitMover,
@@ -47,6 +45,7 @@ partial struct UnitMoverSystem : ISystem
 public partial struct UnitMoverJob : IJobEntity
 {
     public float DeltaTime;
+
     public void Execute(ref LocalTransform localTransform, in UnitMover unitMover, ref PhysicsVelocity physicsVelocity)
     {
         float3 moveDirection = unitMover.TargetPosition - localTransform.Position;
@@ -59,7 +58,7 @@ public partial struct UnitMoverJob : IJobEntity
             physicsVelocity.Angular = float3.zero;
             return;
         }
-        
+
         moveDirection = math.normalize(moveDirection);
 
         //Quay
