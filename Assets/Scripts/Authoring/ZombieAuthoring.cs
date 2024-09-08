@@ -1,0 +1,22 @@
+﻿using Unity.Entities;
+using UnityEngine;
+
+namespace DefaultNamespace.Authoring
+{
+    public class ZombieAuthoring : MonoBehaviour
+    {
+        private class Baker : Baker<ZombieAuthoring>
+        {
+            public override void Bake(ZombieAuthoring authoring)
+            {
+                Entity entity = GetEntity(TransformUsageFlags.Dynamic);
+                AddComponent(entity, new Zombie());
+            }
+        }
+    }
+}
+
+public struct Zombie : IComponentData
+{
+    
+}
