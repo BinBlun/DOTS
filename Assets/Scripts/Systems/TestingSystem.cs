@@ -15,6 +15,6 @@ partial struct TestingSystem : ISystem
         {
             unitCount++;
         }
-        Debug.Log("UnitCount: " + unitCount);
+        //Debug.Log("UnitCount: " + unitCount);
     }
 }
