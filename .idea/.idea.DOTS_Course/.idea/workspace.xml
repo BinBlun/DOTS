@@ -29,6 +29,10 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.entities/Unity.Entities/EntityCommandBufferSystem.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.entities/Unity.Entities/Stubs/Unity/Debug.cs" root0="SKIP_HIGHLIGHTING" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 8
@@ -101,6 +105,9 @@
       <workItem from="1725593505242" duration="1894000" />
       <workItem from="1725595526044" duration="1216000" />
       <workItem from="1725599165689" duration="2456000" />
+      <workItem from="1725849904731" duration="429000" />
+      <workItem from="1725850353842" duration="2678000" />
+      <workItem from="1725869211314" duration="7128000" />
     </task>
     <servers />
   </component>
