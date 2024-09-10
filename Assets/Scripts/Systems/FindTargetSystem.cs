@@ -5,8 +5,6 @@ using Unity.Physics;
 using Unity.Transforms;
 using UnityEngine;
 
-namespace DefaultNamespace.Systems
-{
     public partial struct FindTargetSystem : ISystem
     {
         [BurstCompile]
@@ -55,4 +53,3 @@ namespace DefaultNamespace.Systems
             }
         }
     }
-}

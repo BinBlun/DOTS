@@ -1,18 +1,26 @@
 using Unity.Burst;
 using Unity.Entities;
+using Unity.Transforms;
+using UnityEngine;
 
-[UpdateInGroup(typeof(LateSimulationSystemGroup))]
+[UpdateInGroup(typeof(SimulationSystemGroup), OrderFirst = true)]
 public partial struct ResetTargetSystem : ISystem
 {
     [BurstCompile]
     public void OnUpdate(ref SystemState state)
     {
+        Debug.Log("ResetTargetSystem " + UnityEngine.Time.frameCount);
         foreach (RefRW<Target> target in SystemAPI.Query<RefRW<Target>>())
         {
-            if (!SystemAPI.Exists(target.ValueRO.targetEntity))
+            if (target.ValueRW.targetEntity != Entity.Null)
             {
-                target.ValueRW.targetEntity = Entity.Null;
+                if (!SystemAPI.Exists(target.ValueRO.targetEntity) ||
+                    !SystemAPI.HasComponent<LocalTransform>(target.ValueRO.targetEntity))
+                {
+                    target.ValueRW.targetEntity = Entity.Null;
+                }
             }
+            
         }
     }
 }

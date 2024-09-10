@@ -1,7 +1,7 @@
 using UnityEngine;
 
 
-    public class MouseWorldPosition : UnityEngine.MonoBehaviour
+    public class MouseWorldPosition : MonoBehaviour
     {
         public static MouseWorldPosition Instance { get; private set; }
 

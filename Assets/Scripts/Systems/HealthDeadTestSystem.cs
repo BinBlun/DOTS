@@ -25,6 +25,6 @@ public partial struct HealthDeadTestSystem : ISystem
             }
         }
 
-        entityCommandBuffer.Playback(state.EntityManager);
+        //entityCommandBuffer.Playback(state.EntityManager);
     }
 }

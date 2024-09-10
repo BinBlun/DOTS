@@ -1,10 +1,8 @@
 using Unity.Burst;
-using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
 using UnityEngine;
-
 
 public partial struct BulletMoverSystem : ISystem
 {
@@ -22,6 +20,13 @@ public partial struct BulletMoverSystem : ISystem
                      RefRO<Bullet>,
                      RefRO<Target>>().WithEntityAccess())
         {
+            
+            if (target.ValueRO.targetEntity == Entity.Null)
+            {
+                entityCommandBuffer.DestroyEntity(entity);
+                continue;
+            }
+            
             LocalTransform targetLocalTransform = SystemAPI.GetComponent<LocalTransform>(target.ValueRO.targetEntity);
             
             float distanceBeforeSq = math.distancesq(localTransform.ValueRO.Position, targetLocalTransform.Position);
