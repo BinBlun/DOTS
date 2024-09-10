@@ -1,10 +1,12 @@
 using Unity.Entities;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 
 public class EntitiesReferencesAuthoring : MonoBehaviour
 {
-    public GameObject BulletPrefabGameObject;
+    public GameObject bulletPrefabGameObject;
+    public GameObject zombiePrefabGameObject;
     
     private class EntitiesReferencesAuthoringBaker : Baker<EntitiesReferencesAuthoring>
     {
@@ -13,7 +15,8 @@ public class EntitiesReferencesAuthoring : MonoBehaviour
             Entity entity = GetEntity(TransformUsageFlags.Dynamic);
             AddComponent(entity, new EntitiesReferences
             {
-                bulletPrefabEntity = GetEntity(authoring.BulletPrefabGameObject, TransformUsageFlags.Dynamic),
+                bulletPrefabEntity = GetEntity(authoring.bulletPrefabGameObject, TransformUsageFlags.Dynamic),
+                zombiePrefabEntity = GetEntity(authoring.zombiePrefabGameObject, TransformUsageFlags.Dynamic),
             });
         }
     }
@@ -23,4 +26,5 @@ public class EntitiesReferencesAuthoring : MonoBehaviour
 public struct EntitiesReferences : IComponentData
 {
     public Entity bulletPrefabEntity;
+    public Entity zombiePrefabEntity;
 }

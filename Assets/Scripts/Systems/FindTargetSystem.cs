@@ -41,6 +41,10 @@ using UnityEngine;
                 {
                     foreach (var distanceHit in distanceHitsList)
                     {
+                        if (!SystemAPI.Exists(distanceHit.Entity) || !SystemAPI.HasComponent<Unit>(distanceHit.Entity))
+                        {
+                            continue;
+                        }
                         Unit targetUnit = SystemAPI.GetComponent<Unit>(distanceHit.Entity);
                         if (targetUnit.faction == findTarget.ValueRO.targetFaction)
                         {
