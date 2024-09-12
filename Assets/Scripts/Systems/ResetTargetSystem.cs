@@ -9,7 +9,6 @@ public partial struct ResetTargetSystem : ISystem
     [BurstCompile]
     public void OnUpdate(ref SystemState state)
     {
-        Debug.Log("ResetTargetSystem " + UnityEngine.Time.frameCount);
         foreach (RefRW<Target> target in SystemAPI.Query<RefRW<Target>>())
         {
             if (target.ValueRW.targetEntity != Entity.Null)
@@ -20,7 +19,18 @@ public partial struct ResetTargetSystem : ISystem
                     target.ValueRW.targetEntity = Entity.Null;
                 }
             }
-            
+        }
+        
+        foreach (RefRW<TargetOverride> targetOverride in SystemAPI.Query<RefRW<TargetOverride>>())
+        {
+            if (targetOverride.ValueRW.targetEntity != Entity.Null)
+            {
+                if (!SystemAPI.Exists(targetOverride.ValueRO.targetEntity) ||
+                    !SystemAPI.HasComponent<LocalTransform>(targetOverride.ValueRO.targetEntity))
+                {
+                    targetOverride.ValueRW.targetEntity = Entity.Null;
+                }
+            }
         }
     }
 }

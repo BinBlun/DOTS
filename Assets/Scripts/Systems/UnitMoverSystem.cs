@@ -49,7 +49,7 @@ public partial struct UnitMoverJob : IJobEntity
 
     public void Execute(ref LocalTransform localTransform, in UnitMover unitMover, ref PhysicsVelocity physicsVelocity)
     {
-        float3 moveDirection = unitMover.TargetPosition - localTransform.Position;
+        float3 moveDirection = unitMover.targetPosition - localTransform.Position;
 
         float reachedTargetDistanceSq = UnitMoverSystem.REACHED_TARGET_POSITION_DISTANCE_SQ;
         if (math.lengthsq(moveDirection) <= reachedTargetDistanceSq)

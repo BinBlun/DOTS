@@ -32,13 +32,11 @@ public partial struct RandomWalkingSystem : ISystem
                     random.NextFloat(randomWalking.ValueRO.distanceMin, randomWalking.ValueRO.distanceMax);
                 
                 randomWalking.ValueRW.random = random;
-                
-                Debug.Log(randomWalking.ValueRO.targetPosition);
             }
             else
             {
                 //Too far, move closer
-                unitMover.ValueRW.TargetPosition = randomWalking.ValueRO.targetPosition;
+                unitMover.ValueRW.targetPosition = randomWalking.ValueRO.targetPosition;
             }
 
             ;

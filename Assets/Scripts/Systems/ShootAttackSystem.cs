@@ -7,6 +7,11 @@ using UnityEngine;
 
 public partial struct ShootAttackSystem : ISystem
 {
+    public void OnCreate(ref SystemState state)
+    {
+        state.RequireForUpdate<EntitiesReferences>();
+    }
+
     [BurstCompile]
     public void OnUpdate(ref SystemState state)
     {
@@ -21,7 +26,7 @@ public partial struct ShootAttackSystem : ISystem
                      RefRW<LocalTransform>,
                      RefRW<ShootAttack>,
                      RefRO<Target>,
-                     RefRW<UnitMover>>())
+                     RefRW<UnitMover>>().WithDisabled<MoveOverride>())
         {
             if (target.ValueRO.targetEntity == Entity.Null)
             {
@@ -33,13 +38,13 @@ public partial struct ShootAttackSystem : ISystem
                 shootAttack.ValueRO.attackDistance)
             {
                 //Too far move closer
-                unitMover.ValueRW.TargetPosition = targetLocalTransform.Position;
+                unitMover.ValueRW.targetPosition = targetLocalTransform.Position;
                 continue;
             }
             else
             {
                 //Close enough, stop moving and attack
-                unitMover.ValueRW.TargetPosition = localTransform.ValueRO.Position;
+                unitMover.ValueRW.targetPosition = localTransform.ValueRO.Position;
             }
             
             float3 aimDirection = targetLocalTransform.Position - localTransform.ValueRO.Position;
@@ -67,6 +72,9 @@ public partial struct ShootAttackSystem : ISystem
 
             RefRW<Target> bulletTarget = SystemAPI.GetComponentRW<Target>(bulletEntity);
             bulletTarget.ValueRW.targetEntity = target.ValueRO.targetEntity;
+
+            shootAttack.ValueRW.onShoot.isTrigger = true;
+            shootAttack.ValueRW.onShoot.shootFromPosition = bulletSpawnWorldPosition;
         }
     }
 }
