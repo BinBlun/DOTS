@@ -19,23 +19,19 @@ public partial struct ActiveAnimationSystem : ISystem
     {
         AnimationDataHolder animationDataHolder = SystemAPI.GetSingleton<AnimationDataHolder>();
 
-        foreach ((
+        ActiveAnimationJob activeAnimationJob = new ActiveAnimationJob
+        {
+            deltaTime = SystemAPI.Time.DeltaTime,
+            animationDataBlobArrayBlobAssetReference = animationDataHolder.animationDataBlobArrayBlobAssetReference,
+        };
+        activeAnimationJob.ScheduleParallel();
+        /*foreach ((
                      RefRW<ActiveAnimation> activeAnimation,
                      RefRW<MaterialMeshInfo> materialMeshInfo)
                  in SystemAPI.Query<
                      RefRW<ActiveAnimation>,
                      RefRW<MaterialMeshInfo>>())
         {
-            if (Input.GetKeyDown(KeyCode.T))
-            {
-                activeAnimation.ValueRW.nextAnimationType = AnimationDataSO.AnimationType.SoldierIdle;
-            }
-
-            if (Input.GetKeyDown(KeyCode.Y))
-            {
-                activeAnimation.ValueRW.nextAnimationType = AnimationDataSO.AnimationType.SoldierWalk;
-            }
-
             ref AnimationData animationData =
                 ref animationDataHolder.animationDataBlobArrayBlobAssetReference.Value[(int)activeAnimation.ValueRW.activeAnimationType];
             activeAnimation.ValueRW.frameTimer += SystemAPI.Time.DeltaTime;
@@ -45,6 +41,46 @@ public partial struct ActiveAnimationSystem : ISystem
                 activeAnimation.ValueRW.frame = (activeAnimation.ValueRW.frame + 1) % animationData.frameMax;
 
                 materialMeshInfo.ValueRW.MeshID = animationData.batchMeshIdBlobArray[activeAnimation.ValueRW.frame];
+
+                if (activeAnimation.ValueRO.frame == 0 && activeAnimation.ValueRO.activeAnimationType == AnimationDataSO.AnimationType.SoldierShoot)
+                {
+                    activeAnimation.ValueRW.activeAnimationType = AnimationDataSO.AnimationType.None;
+                }
+                
+                if (activeAnimation.ValueRO.frame == 0 && activeAnimation.ValueRO.activeAnimationType == AnimationDataSO.AnimationType.ZombieAttack)
+                {
+                    activeAnimation.ValueRW.activeAnimationType = AnimationDataSO.AnimationType.None;
+                }
+            }
+        }*/
+    }
+}
+
+[BurstCompile]
+public partial struct ActiveAnimationJob : IJobEntity
+{
+    public float deltaTime;
+    public BlobAssetReference<BlobArray<AnimationData>> animationDataBlobArrayBlobAssetReference;
+    public void Execute( ref ActiveAnimation activeAnimation, ref MaterialMeshInfo materialMeshInfo)
+    {
+        ref AnimationData animationData =
+            ref animationDataBlobArrayBlobAssetReference.Value[(int)activeAnimation.activeAnimationType];
+        activeAnimation.frameTimer += deltaTime;
+        if (activeAnimation.frameTimer > animationData.frameTimerMax)
+        {
+            activeAnimation.frameTimer -= animationData.frameTimerMax;
+            activeAnimation.frame = (activeAnimation.frame + 1) % animationData.frameMax;
+
+            materialMeshInfo.MeshID = animationData.batchMeshIdBlobArray[activeAnimation.frame];
+
+            if (activeAnimation.frame == 0 && activeAnimation.activeAnimationType == AnimationDataSO.AnimationType.SoldierShoot)
+            {
+                activeAnimation.activeAnimationType = AnimationDataSO.AnimationType.None;
+            }
+                
+            if (activeAnimation.frame == 0 && activeAnimation.activeAnimationType == AnimationDataSO.AnimationType.ZombieAttack)
+            {
+                activeAnimation.activeAnimationType = AnimationDataSO.AnimationType.None;
             }
         }
     }

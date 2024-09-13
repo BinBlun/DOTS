@@ -125,6 +125,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1419460086549966013, guid: 51f0e16628eacb647a78bedff2316d0c, type: 3}
+      propertyPath: aimAnimationType
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1419460086549966013, guid: 51f0e16628eacb647a78bedff2316d0c, type: 3}
+      propertyPath: idleAnimationType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1419460086549966013, guid: 51f0e16628eacb647a78bedff2316d0c, type: 3}
+      propertyPath: walkAnimationType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1419460086549966013, guid: 51f0e16628eacb647a78bedff2316d0c, type: 3}
+      propertyPath: shootAnimationType
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 4910821535499897970, guid: 51f0e16628eacb647a78bedff2316d0c, type: 3}
       propertyPath: faction
       value: 0

@@ -34,6 +34,7 @@
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.entities/Unity.Entities/EntityCommandBufferSystem.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.entities/Unity.Entities/EntityComponentStoreDebug.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.entities/Unity.Entities/Iterators/EnabledRefRW.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.entities/Unity.Entities/Iterators/RefRO.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.entities/Unity.Entities/Stubs/Unity/Debug.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.entities/Unity.Transforms/LocalTransform.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.entities/Unity.Transforms/PostTransformMatrix.cs" root0="SKIP_HIGHLIGHTING" />
@@ -120,7 +121,7 @@
       <workItem from="1726108921739" duration="165000" />
       <workItem from="1726109113987" duration="15022000" />
       <workItem from="1726195328583" duration="236000" />
-      <workItem from="1726195593836" duration="9425000" />
+      <workItem from="1726195593836" duration="17825000" />
     </task>
     <servers />
   </component>
