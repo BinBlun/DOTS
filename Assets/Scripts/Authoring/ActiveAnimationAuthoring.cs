@@ -5,8 +5,7 @@ using UnityEngine.Rendering;
 
 public class ActiveAnimationAuthoring : MonoBehaviour
 {
-   public AnimationDataSO soldierIdle;
-    
+    public AnimationDataSO.AnimationType nextAnimationType;
     private class Baker : Baker<ActiveAnimationAuthoring>
     {
         public override void Bake(ActiveAnimationAuthoring authoring)
@@ -17,10 +16,7 @@ public class ActiveAnimationAuthoring : MonoBehaviour
             
             AddComponent(entity, new ActiveAnimation
             {
-                frame0 = entitiesGraphicsSystem.RegisterMesh(authoring.soldierIdle.meshArray[0]),
-                frame1 = entitiesGraphicsSystem.RegisterMesh(authoring.soldierIdle.meshArray[1]),
-                frameMax = authoring.soldierIdle.meshArray.Length,
-                frameTimerMax = authoring.soldierIdle.frameTimerMax,
+                nextAnimationType = authoring.nextAnimationType,
             });
         }
     }
@@ -29,10 +25,7 @@ public class ActiveAnimationAuthoring : MonoBehaviour
 public struct ActiveAnimation : IComponentData
 {
     public int frame;
-    public int frameMax;
     public float frameTimer;
-    public float frameTimerMax;
-    
-    public BatchMeshID frame0;
-    public BatchMeshID frame1;
+    public AnimationDataSO.AnimationType activeAnimationType;
+    public AnimationDataSO.AnimationType nextAnimationType;
 }
