@@ -1,5 +1,6 @@
 using Unity.Burst;
 using Unity.Entities;
+using Unity.Jobs;
 
 [UpdateInGroup(typeof(LateSimulationSystemGroup), OrderLast = true)]
 partial struct ResetEventsSystem : ISystem
@@ -7,7 +8,11 @@ partial struct ResetEventsSystem : ISystem
     [BurstCompile]
     public void OnUpdate(ref SystemState state)
     {
-        foreach (RefRW<Selected> selected in SystemAPI.Query<RefRW<Selected>>().WithPresent<Selected>())
+        new ResetSelectedEventsJob().ScheduleParallel();
+        new ResetHealthEventsJob().ScheduleParallel();
+        new ResetShootAttackEventsJob().ScheduleParallel();
+        
+        /*foreach (RefRW<Selected> selected in SystemAPI.Query<RefRW<Selected>>().WithPresent<Selected>())
         {
             selected.ValueRW.onSelected = false;
             selected.ValueRW.onDeselected = false;
@@ -21,6 +26,35 @@ partial struct ResetEventsSystem : ISystem
         foreach (RefRW<ShootAttack> health in SystemAPI.Query<RefRW<ShootAttack>>())
         {
             health.ValueRW.onShoot.isTrigger = false;
-        }
+        }*/
+    }
+}
+
+[BurstCompile]
+public partial struct ResetShootAttackEventsJob : IJobEntity
+{
+    public void Execute(ref ShootAttack shootAttack)
+    {
+        shootAttack.onShoot.isTrigger = false;
+    }
+}
+
+[BurstCompile]
+public partial struct ResetHealthEventsJob : IJobEntity
+{
+    public void Execute(ref Health health)
+    {
+        health.onHealthChanged = false;
+    }
+}
+
+[BurstCompile]
+[WithOptions(EntityQueryOptions.IgnoreComponentEnabledState)]
+public partial struct ResetSelectedEventsJob : IJobEntity
+{
+    public void Execute(ref Selected selected)
+    {
+        selected.onSelected = false;
+        selected.onDeselected = false;
     }
 }

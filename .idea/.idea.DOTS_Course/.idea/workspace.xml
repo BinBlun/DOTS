@@ -64,7 +64,7 @@
 }</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\6000.0.7f1-x86_64\Editor\Unity.exe" />
+      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\6000.0.7f1\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-projectPath D:\SourceTree\DOTS_Course -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="D:\SourceTree\DOTS_Course" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -72,7 +72,7 @@
       <method v="2" />
     </configuration>
     <configuration name="Unit Tests (batch mode)" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\6000.0.7f1-x86_64\Editor\Unity.exe" />
+      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\6000.0.7f1\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath D:\SourceTree\DOTS_Course -testResults Logs/results.xml -logFile Logs/Editor.log -testPlatform EditMode -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="D:\SourceTree\DOTS_Course" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -118,7 +118,9 @@
       <workItem from="1725938305250" duration="16032000" />
       <workItem from="1726024149487" duration="15344000" />
       <workItem from="1726108921739" duration="165000" />
-      <workItem from="1726109113987" duration="12233000" />
+      <workItem from="1726109113987" duration="15022000" />
+      <workItem from="1726195328583" duration="236000" />
+      <workItem from="1726195593836" duration="3579000" />
     </task>
     <servers />
   </component>
